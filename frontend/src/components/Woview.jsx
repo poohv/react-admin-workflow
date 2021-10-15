@@ -3,38 +3,37 @@ import React, { Component } from 'react';
 class Woview extends Component {
     render() {
         return (
-            <div>
-                <div class="card card-primary">
-          <div class="card-header">
-            <h3 class="card-title">변경</h3>
-
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                <i class="fas fa-minus"></i>
-              </button>
-              <button type="button" class="btn btn-tool" data-card-widget="remove">
-                <i class="fas fa-times"></i>
-              </button>
-            </div>
-          </div>
-         <form>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"/>
-                  </div>
-                  
-              </div>
-              <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email"/>
-                  </div>
-                  
-              </div>
+            
               
+        <div class="card">       
+            <div class="card-header">
+              <div class="post">사용자 정보</div>
+            </div>
+         <form>
+         
+          <div class="card-body">
+          
+            <div class="row">
+              <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">변경 번호</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="변경 번호"/>
+                  </div>
+                  
+              </div>
+              <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">요약</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="요약"/>
+                  </div>
+                  
+              </div>
+              <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">작성자</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="작성자"/>
+                  </div>      
+              </div>        
             </div>
             <div class="row">
               <div class="col-md-6">
@@ -72,11 +71,24 @@ class Woview extends Component {
             </div>    
           </div>
          </form>
-          <div class="card-footer">
-            
-          </div>
+         <div class="card-header">
+            <div class="post">상세 정보</div>
+         </div>
+               
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-2">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">변경 번호</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="변경 번호"/>
+                  </div>
+                  
+              </div>
+              </div>
+              </div>
         </div>
-            </div>
+    
+           
         );
     }
 }
