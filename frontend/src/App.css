@@ -13,6 +13,9 @@
   }
 }
 
+.form-control {
+  width: 50%;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -23,7 +26,17 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+body {
+  font-size: small;
+}
+.card-header {
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 2px solid rgba(40, 105, 226, 0.993);
+  padding: 0.75rem 1.25rem;
+  position: relative;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
 .App-link {
   color: #61dafb;
 }
