@@ -2,10 +2,22 @@ import React, { Component } from "react";
 import "../App.css";
 
 class Woview extends Component {
+  constructor(props) {}
+
   render() {
     return (
       <div class="row">
         <div class="col-12">
+          <div class="row no-print">
+            <div class="col-12">
+              <button type="button" class="btn btn-danger float-right">
+                <i class="fas"></i> Close
+              </button>
+              <button type="submit" class="btn btn-success float-right">
+                <i class="fas fa-save"></i> Save
+              </button>
+            </div>
+          </div>
           <div class="card card-primary card-outline card-outline-tabs">
             <div class="card-header p-0 border-bottom-0">
               <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
@@ -24,6 +36,7 @@ class Woview extends Component {
                 </li>
               </ul>
             </div>
+
             <div class="card-body">
               <div class="card">
                 <div class="card-header">
@@ -40,6 +53,7 @@ class Woview extends Component {
                           class="form-control"
                           id="exampleInputEmail1"
                           placeholder="변경 번호"
+                          name="wonum"
                         />
                       </div>
                     </div>
@@ -51,6 +65,7 @@ class Woview extends Component {
                           class="form-control"
                           id="exampleInputEmail1"
                           placeholder="요약"
+                          name="status"
                         />
                       </div>
                     </div>
@@ -72,8 +87,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="woname"
                             placeholder="변경 번호"
+                            name="woname"
                           />
                         </div>
                       </div>
@@ -83,8 +99,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="wophone"
                             placeholder="요약"
+                            name="wophone"
                           />
                         </div>
                       </div>
@@ -94,8 +111,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="worequ"
                             placeholder="작성자"
+                            name="worequ"
                           />
                         </div>
                       </div>
@@ -114,8 +132,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
-                            placeholder="변경 번호"
+                            id="descript"
+                            placeholder="변경 개요"
+                            name="descript"
                           />
                         </div>
 
@@ -142,8 +161,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="woclass"
                             placeholder="분류"
+                            name="woclass"
                           />
                         </div>
                         <div class="form-group">
@@ -151,8 +171,9 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="wolevel"
                             placeholder="등급"
+                            name="wolevel"
                           />
                         </div>
 
@@ -161,8 +182,30 @@ class Woview extends Component {
                           <input
                             type="text"
                             class="form-control"
-                            id="exampleInputEmail1"
+                            id="wotype"
                             placeholder="변경 유형"
+                            name="wotype"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card-header">
+                    <div class="post">날 짜</div>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">작성일</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="wocrdt"
+                            placeholder="날짜"
+                            name="wocrdt"
                           />
                         </div>
                       </div>
