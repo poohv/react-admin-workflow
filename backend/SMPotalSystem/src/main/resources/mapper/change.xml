@@ -6,6 +6,6 @@
  <mapper namespace="com.example.demo.mapper">
  	<insert id="Insertchage" parameterType="Hashmap">
  		insert into change (wonum,status,descript,woclass,wolevel,wotype,wocrdt) 
- 		values (#wonum,#status,#descript,#woclass,#wolevel,#wotype,#wocrdt)
+ 		values (#{wonum},#{status},#{descript},#{woclass},#{wolevel},#{wotype},#{wocrdt})
  	</insert>
  </mapper>
