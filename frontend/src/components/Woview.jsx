@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-
 import "../App.css";
+import apiservice from "../service/apiservice";
 
 function Woview() {
+  let today = new Date();
+
   const [inputs, setInputs] = useState({
-    wonum: "",
-    status: "",
+    wonum:
+      today.toLocaleDateString().replace(/. /gi, "").replace(".", "") +
+      Math.floor(Math.random() * 100),
+    status: "NEW",
     woname: "",
     wophone: "",
   });
@@ -21,6 +25,7 @@ function Woview() {
 
   const onsummit = (e) => {
     e.preventDefault();
+    apiservice.Newapi(inputs);
   };
 
   return (
@@ -73,6 +78,7 @@ function Woview() {
                           id="exampleInputEmail1"
                           placeholder="변경 번호"
                           name="wonum"
+                          readOnly="readOnly"
                           value={inputs.wonum}
                           onChange={changehandler}
                         />
@@ -87,6 +93,7 @@ function Woview() {
                           id="exampleInputEmail1"
                           placeholder="요약"
                           name="status"
+                          readOnly="readOnly"
                           value={inputs.status}
                           onChange={changehandler}
                         />
