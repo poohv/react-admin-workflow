@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
 
 import "../App.css";
+import Smsr from "../service/SMpotalSerivce";
 
 function Woview() {
+  let today = new Date();  
+  
   const [inputs, setInputs] = useState({
-    wonum: "",
-    status: "",
-    woname: "",
-    wophone: "",
+    wonum: today.toLocaleDateString().replace(/. /gi,"").replace(".","")+Math.floor(Math.random()*100),
+    status: "NEW",
+    descript: "g",
+    woclass: "g",
+    wolevel:"g",
+    wotype:"g",
+    wocrdt:"g"
+  });
+
+  const [userinputs, setUserinputs] = useState({
+    woname:"1",
+    wophone:"2",
+    worequ:"3"
   });
 
   const changehandler = (e) => {
@@ -21,6 +33,7 @@ function Woview() {
 
   const onsummit = (e) => {
     e.preventDefault();
+    Smsr.Insertchage(inputs);
   };
 
   return (
@@ -30,7 +43,7 @@ function Woview() {
           <a class="btn btn-danger float-right" href="/Wochange">
             <i class="fas"></i> Close
           </a>
-          <button type="submit" class="btn btn-success float-right">
+          <button type="submit" class="btn btn-success float-right" onsummit={onsummit}>
             <i class="fas fa-save"></i> Save
           </button>
         </div>
@@ -73,6 +86,7 @@ function Woview() {
                           id="exampleInputEmail1"
                           placeholder="변경 번호"
                           name="wonum"
+                          readOnly="readOnly"
                           value={inputs.wonum}
                           onChange={changehandler}
                         />
@@ -87,6 +101,7 @@ function Woview() {
                           id="exampleInputEmail1"
                           placeholder="요약"
                           name="status"
+                          readOnly="readOnly"
                           value={inputs.status}
                           onChange={changehandler}
                         />
@@ -111,7 +126,7 @@ function Woview() {
                           id="woname"
                           placeholder="변경 번호"
                           name="woname"
-                          value={inputs.woname}
+                          value={userinputs.woname}
                           onChange={changehandler}
                         />
                       </div>
@@ -125,7 +140,7 @@ function Woview() {
                           id="wophone"
                           placeholder="요약"
                           name="wophone"
-                          value={inputs.wophone}
+                          value={userinputs.wophone}
                           onChange={changehandler}
                         />
                       </div>
@@ -139,6 +154,7 @@ function Woview() {
                           id="worequ"
                           placeholder="작성자"
                           name="worequ"
+                          value={userinputs.worequ}
                         />
                       </div>
                     </div>
@@ -160,6 +176,7 @@ function Woview() {
                           id="descript"
                           placeholder="변경 개요"
                           name="descript"
+                          value={inputs.descript}
                         />
                       </div>
 
@@ -189,6 +206,7 @@ function Woview() {
                           id="woclass"
                           placeholder="분류"
                           name="woclass"
+                          value={inputs.woclass}
                         />
                       </div>
                       <div class="form-group">
@@ -199,6 +217,7 @@ function Woview() {
                           id="wolevel"
                           placeholder="등급"
                           name="wolevel"
+                          value={inputs.wolevel}
                         />
                       </div>
 
@@ -210,6 +229,7 @@ function Woview() {
                           id="wotype"
                           placeholder="변경 유형"
                           name="wotype"
+                          value={inputs.wotype}
                         />
                       </div>
                     </div>
@@ -231,6 +251,7 @@ function Woview() {
                           id="wocrdt"
                           placeholder="날짜"
                           name="wocrdt"
+                          value={inputs.wocrdt}
                         />
                       </div>
                     </div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+ 
+ <mapper namespace="com.example.demo.mapper">
+ 	<insert id="Insertchage" parameterType="Hashmap">
+ 		insert into change (wonum,status,descript,woclass,wolevel,wotype,wocrdt) 
+ 		values (#{wonum},#{status},#{descript},#{woclass},#{wolevel},#{wotype},#{wocrdt})
+ 	</insert>
+ </mapper>
