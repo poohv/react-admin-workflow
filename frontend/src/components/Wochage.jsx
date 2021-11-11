@@ -1,9 +1,22 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from "react";
+import servicedata from "../service/SMpotalSerivce"
+import axios from "axios";
 
-class Wochage extends Component {
-    render() {
+
+function Wochage() {
+        const [datalist, setDatalist] = useState([]);
+
+
+        useEffect( () => { 
+            async function fetchData(){ 
+                await servicedata.Smlist().then(function(res){
+                    setDatalist(res.data);
+                })             
+            }  
+            fetchData(); 
+        },[]);
+          
         return (
-            
             <div class="content">
             <div class="container-fluid">          
                 <div class="row">
@@ -35,22 +48,21 @@ class Wochage extends Component {
                                         <th>작성자</th>
                                         <th>구성 품목</th>
                                         <th>상태</th>
-                                        <th>계획 시작 시간</th>
-                                        <th>계획 완료 시간</th>
+                                        <th>작성 시간</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                        Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                        <td>X</td>
-                                    </tr>
+                                    {datalist.map( datalist=>
+                                        <tr>
+                                            <td>{datalist.wonum}</td>
+                                            <td>{datalist.descript}</td>
+                                            <td>{datalist.woname}</td>
+                                            <td>{datalist.woclass}</td>
+                                            <td>{datalist.status}</td>
+                                            <td>{datalist.wocrdt}</td>
+                                        </tr>
+                                    )}    
                                 </tbody>
                             </table>
                         </div>             
@@ -64,7 +76,7 @@ class Wochage extends Component {
            </div>
            
         );
-    }
+    
 }
 
 export default Wochage;

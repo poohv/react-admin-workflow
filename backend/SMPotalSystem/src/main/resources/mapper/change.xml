@@ -5,6 +5,15 @@
  	<insert id="Insertchage" parameterType="HashMap">
  		insert into smchange (wonum,status,descript,woclass,wolevel,wotype,wocrdt) values (#{wonum},#{status},#{descript},#{woclass},#{wolevel},#{wotype},#{wocrdt})
  	</insert>
+ 	
+ 	<insert id="Insertuser" parameterType="HashMap">
+ 		insert into smuser (woname,wophone,wonum) values (#{woname},#{wophone},#{wonum})
+ 	</insert>
+ 	
+ 	
+ 	<select id="Smlist" resultType="HashMap">
+ 		select * from smchange
+ 	</select>
  </mapper>
  
  

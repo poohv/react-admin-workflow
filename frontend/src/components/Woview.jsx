@@ -9,31 +9,40 @@ function Woview() {
   const [inputs, setInputs] = useState({
     wonum: today.toLocaleDateString().replace(/. /gi,"").replace(".","")+Math.floor(Math.random()*100),
     status: "NEW",
-    descript: "g",
-    woclass: "g",
-    wolevel:"g",
-    wotype:"g",
-    wocrdt:"g"
+    descript: "요청사항 있습니다.",
+    woclass: "A",
+    wolevel:"high",
+    wotype:"bau",
+    wocrdt:today.toLocaleDateString()
   });
 
   const [userinputs, setUserinputs] = useState({
-    woname:"1",
-    wophone:"2",
-    worequ:"3"
+    wonum:inputs.wonum,
+    woname:"",
+    wophone:"010-1234-5678",
+    worequ:"pooh"
   });
 
   const changehandler = (e) => {
     const { value, name } = e.target;
-    console.log(name);
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+   setInputs({
+    ...inputs,
+    [name]: value,
+  });
+
+  setUserinputs({
+    ...inputs,
+    [name]: value,
+  });
+    
   };
 
   const onsummit = (e) => {
     e.preventDefault();
-    Smsr.Insertchage(inputs);
+     const datalist = [inputs,userinputs];
+     console.log(datalist);
+    Smsr.Insertchage(datalist);
+   
   };
 
   return (
@@ -242,7 +251,7 @@ function Woview() {
 
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                       <div class="form-group">
                         <label for="exampleInputEmail1">작성일</label>
                         <input
@@ -251,6 +260,7 @@ function Woview() {
                           id="wocrdt"
                           placeholder="날짜"
                           name="wocrdt"
+                          readOnly="readOnly"
                           value={inputs.wocrdt}
                         />
                       </div>
