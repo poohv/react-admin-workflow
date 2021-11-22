@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import servicedata from "../service/SMpotalSerivce";
+import Pagination from "../components/pagination";
+import ReactPaginate from 'react-paginate';
 
 function Wochage({ history }) {
   const [datalist, setDatalist] = useState([]);
+  const [postPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentPosts = datalist.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNum =>setCurrentPage(pageNum);
 
   useEffect(() => {
     async function fetchData() {
+      
+
       await servicedata.Smlist().then(function (res) {
         setDatalist(res.data);
       });
@@ -18,6 +30,10 @@ function Wochage({ history }) {
     const { name } = no.target;
     history.push("/detail/" + name);
   }
+
+
+ 
+
   return (
     <div class="content">
       <div class="container-fluid">
@@ -67,7 +83,7 @@ function Wochage({ history }) {
                           </tr>
                         </thead>
                         <tbody>
-                          {datalist.map((datalist) => (
+                          {currentPosts.map((datalist) => (
                             <tr>
                               <td>
                                 <a
@@ -87,7 +103,10 @@ function Wochage({ history }) {
                           ))}
                         </tbody>
                       </table>
+                      
+                   
                     </div>
+                    <Pagination postPerPage={postPerPage} totalPosts={datalist.length} paginate={paginate}></Pagination>
                   </div>
                 </div>
               </div>

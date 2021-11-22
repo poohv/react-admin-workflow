@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import servicedata from "../service/SMpotalSerivce";
+import {AgGridColumn, AgGridReact} from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+import Pagination from "../components/pagination";
 
 class index extends Component {
   constructor(props) {
@@ -7,19 +11,45 @@ class index extends Component {
 
     this.state = {
       datalist: [],
+      gridApi:null,
+      gridColumnApi:null,
+      postPerPage: 5,
+      currentPage: 1
     };
   }
 
   componentDidMount() {
+    
     servicedata.Smlist().then((res) => {
       this.setState({ datalist: res.data });
-
-      console.log(this.state.datalist);
+     
     });
-  }
 
+  }
   render() {
+    // ag-grid 사용법
+    // const onGridReady = (params) => {
+    //   this.setState({gridApi:params.api});
+    //   this.setState({gridColumnApi:params.columnApi});
+
+    //   fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+    //     .then((resp) => resp.json())
+    // };
+
+    // const onFirstDataRendered = (params) => {
+    //   params.api.sizeColumnsToFit();
+    // };
+
+    const indexOfLastPost = this.state.currentPage * this.state.postPerPage;
+    const indexOfFirstPost = indexOfLastPost - this.state.postPerPage;
+    const currentdatas = this.state.datalist.slice(indexOfFirstPost, indexOfLastPost);
+    
+    const paginate = pageNum =>this.setState({currentPage:pageNum});
+    
+    console.log(this.state.datalist);
+    
     return (
+       
       <div>
         <section class="content">
           <div class="row">
@@ -75,7 +105,8 @@ class index extends Component {
 
               <div class="card-body p-0">
                 <div class="table-responsive">
-                  <table class="table m-0">
+                
+                  <table class="table m-0"  id="example1">
                     <thead>
                       <tr>
                         <th>번호</th>
@@ -85,7 +116,7 @@ class index extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.state.datalist.map((datalist) => (
+                      {currentdatas.map((datalist) => (
                         <tr>
                           <td>
                             <a href="pages/examples/invoice.html">
@@ -110,8 +141,28 @@ class index extends Component {
                         </tr>
                       ))}
                     </tbody>
+                    
                   </table>
+
+                  
+
+
+                  {/*ag-grid 사용법
+                    <div className="ag-theme-alpine" style={{height: 600}}>
+                    <AgGridReact rowData={this.state.datalist} pagination="true" paginationPageSize="10" defaultColDef={{ resizable: true }}
+                    onGridReady={onGridReady}
+                    onFirstDataRendered={onFirstDataRendered}>
+                      
+                    <AgGridColumn  field="wonum" headerName="번호" resizable={true}></AgGridColumn>
+                    
+                      <AgGridColumn field="descript" headerName="요약"></AgGridColumn>
+                      <AgGridColumn  field="status" headerName="상태"></AgGridColumn>
+                      <AgGridColumn field="woname" headerName="작성자"></AgGridColumn>
+                    </AgGridReact>
+                  </div> */}
                 </div>
+                <Pagination postPerPage={this.state.postPerPage} totalPosts={this.state.datalist.length} paginate={paginate}></Pagination>
+                
               </div>
               <div class="card-footer clearfix"></div>
             </div>
