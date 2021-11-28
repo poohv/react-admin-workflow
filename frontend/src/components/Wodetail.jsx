@@ -5,6 +5,8 @@ function Wodetail({ match }) {
   const [datalist, setDatalist] = useState([]);
   const [userinputs, setUserinputs] = useState({});
   const params = match.params;
+  const input = document.querySelectorAll("input");
+  const [workflow, setWorkflow] = useState("승인요청");
 
   useEffect(() => {
     async function fetchData() {
@@ -12,9 +14,32 @@ function Wodetail({ match }) {
         setDatalist(res.data[0]);
       });
     }
-
+    console.log("1");
     fetchData();
   }, []);
+
+  useEffect(function() {
+    console.log("2");
+    if(datalist.status!="NEW"){
+      
+      if (datalist.status=="승인요청") {
+        setWorkflow("승인완료");
+      }
+
+      if (datalist.status=="승인완료"){
+        setWorkflow("검토요청");
+      }
+
+      if (datalist.status=="검토요청"){
+        setWorkflow("검토완료");
+      }
+
+      for (let i = 0; i < input.length; i++) {
+        input[i].setAttribute("readOnly","readOnly")
+      }
+    }
+  }
+);
 
   const changehandler = (e) => {
     const { value, name } = e.target;
@@ -33,24 +58,63 @@ function Wodetail({ match }) {
     e.preventDefault();
     const datalist = [datalist, userinputs];
     console.log(datalist);
-    //업데이트 서비스 구문
+    //업데이트 서비스 구문  
   };
+  
+  function workflowclick(e) {
+    if (datalist.status="NEW") {
+      const list = {wonum:datalist.wonum,status:workflow}
+      setDatalist({
+        status: workflow
+       });
+      Smsr.update(list);
+    }
+    if (datalist.status="NEW") {
+      const list = {wonum:datalist.wonum,status:workflow}
+      setDatalist({
+        status: workflow
+       });
+      Smsr.update(list);
+    }
+  }
 
   return (
     <form>
       {/* {datalist.map((datalist) => ( */}
       <div>
         <div class="card">
-          <div class="col-12">
-            <a class="btn btn-danger float-right" href="/Wochange">
+          <div class="margin">
+          <div class="btn-group">
+            <a class="btn btn-danger float-right btn-group" href="/Wochange">
               <i class="fas"></i> Close
             </a>
+            </div> 
+            <div class="btn-group">
             <button
               type="submit"
-              class="btn btn-success float-right"
+              class="btn btn-success  "
               onsummit={onsummit}
             >
               <i class="fas fa-save"></i> Save
+            </button>
+            </div>
+      
+            <button
+              type="button"
+              class="btn btn-info float-right"
+              id="workflow"
+              onClick={workflowclick}
+            >
+              <i class="fas fa-save"></i> {workflow}
+            </button>
+            
+            <button
+              type="button"
+              class="btn btn-warning float-right"
+              id="workflowcancel"
+              onClick={workflowclick}
+            >
+              <i class="fas fa-save"></i> 승인취소
             </button>
           </div>
         </div>
