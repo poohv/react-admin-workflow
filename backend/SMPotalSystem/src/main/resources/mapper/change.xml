@@ -25,6 +25,11 @@
  		ON a.wonum=b.wonum
  		where a.wonum = #{no}
  	</select>
+ 	
+ 	<update id="update">
+ 		update smchange set status=#{status}
+ 		where wonum = #{wonum} 
+ 	</update>
  </mapper>
  
  

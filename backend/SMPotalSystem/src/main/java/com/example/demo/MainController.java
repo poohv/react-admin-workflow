@@ -29,7 +29,6 @@ public class MainController {
 		return sm.Smlist();
 	}
 	
-	
 	@ResponseBody
 	@RequestMapping("/api/Insertchage")
 	public void Insertchage(@RequestBody List<Map<String, Object>> params) {
@@ -51,6 +50,7 @@ public class MainController {
 	@ResponseBody
 	@RequestMapping("/api/update")
 	public void update(@RequestBody Map<String, Object> params) {
+		System.out.println(params);
 		sm.update(params);
 	}
 }
