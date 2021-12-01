@@ -18,28 +18,26 @@ function Wodetail({ match }) {
     fetchData();
   }, []);
 
-  useEffect(function() {
+  useEffect(function () {
     console.log("2");
-    if(datalist.status!="NEW"){
-      
-      if (datalist.status=="승인요청") {
+    if (datalist.status != "NEW") {
+      if (datalist.status == "승인요청") {
         setWorkflow("승인완료");
       }
 
-      if (datalist.status=="승인완료"){
+      if (datalist.status == "승인완료") {
         setWorkflow("검토요청");
       }
 
-      if (datalist.status=="검토요청"){
+      if (datalist.status == "검토요청") {
         setWorkflow("검토완료");
       }
 
       for (let i = 0; i < input.length; i++) {
-        input[i].setAttribute("readOnly","readOnly")
+        input[i].setAttribute("readOnly", "readOnly");
       }
     }
-  }
-);
+  });
 
   const changehandler = (e) => {
     const { value, name } = e.target;
@@ -47,75 +45,69 @@ function Wodetail({ match }) {
       ...datalist,
       [name]: value,
     });
-
-    setUserinputs({
-      ...userinputs,
-      [name]: value,
-    });
   };
 
   const onsummit = (e) => {
     e.preventDefault();
-    const datalist = [datalist, userinputs];
-    console.log(datalist);
-    //업데이트 서비스 구문  
-  };
-  
-  function workflowclick(e) {
-    if (datalist.status="NEW") {
-      const list = {wonum:datalist.wonum,status:workflow}
-      setDatalist({
-        status: workflow
-       });
-      Smsr.update(list);
+    //상태가 NEW 일때 컬럼수정 저장(업데이트) 가능
+    if (datalist.status == "NEW") {
+      Smsr.update(datalist);
     }
-    if (datalist.status="NEW") {
-      const list = {wonum:datalist.wonum,status:workflow}
+  };
+
+  function workflowclick(e) {
+    if ((datalist.status = "NEW")) {
+      const list = { wonum: datalist.wonum, status: workflow };
       setDatalist({
-        status: workflow
-       });
+        status: workflow,
+      });
       Smsr.update(list);
     }
   }
 
   return (
-    <form>
+    <form onSubmit={onsummit}>
       {/* {datalist.map((datalist) => ( */}
       <div>
         <div class="card">
-          <div class="margin">
-          <div class="btn-group">
-            <a class="btn btn-danger float-right btn-group" href="/Wochange">
-              <i class="fas"></i> Close
-            </a>
-            </div> 
+          <div>
             <div class="btn-group">
-            <button
-              type="submit"
-              class="btn btn-success  "
-              onsummit={onsummit}
-            >
-              <i class="fas fa-save"></i> Save
-            </button>
+              <a class="btn btn-danger" href="/Wochange">
+                <i class="fas"></i> Close
+              </a>
             </div>
-      
-            <button
-              type="button"
-              class="btn btn-info float-right"
-              id="workflow"
-              onClick={workflowclick}
-            >
-              <i class="fas fa-save"></i> {workflow}
-            </button>
-            
-            <button
-              type="button"
-              class="btn btn-warning float-right"
-              id="workflowcancel"
-              onClick={workflowclick}
-            >
-              <i class="fas fa-save"></i> 승인취소
-            </button>
+
+            <div class="btn-group">
+              <button
+                type="submit"
+                class="btn btn-success  "
+                onsummit={onsummit}
+              >
+                <i class="fas fa-save"></i> Save
+              </button>
+            </div>
+
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-warning "
+                id="workflowcancel"
+                onClick={workflowclick}
+              >
+                <i class="fas fa-save"></i> {workflow.substring(0, 2)}취소
+              </button>
+            </div>
+
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-info "
+                id="workflow"
+                onClick={workflowclick}
+              >
+                <i class="fas fa-save"></i> {workflow}
+              </button>
+            </div>
           </div>
         </div>
         <div class="row">
@@ -138,6 +130,20 @@ function Wodetail({ match }) {
                       aria-selected="true"
                     >
                       목록
+                    </a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      id="custom-tabs-one-home-tab"
+                      data-toggle="pill"
+                      href="#custom-tabs-one-home"
+                      role="tab"
+                      aria-controls="custom-tabs-one-home"
+                      aria-selected="true"
+                    >
+                      승인자
                     </a>
                   </li>
                 </ul>

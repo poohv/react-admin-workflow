@@ -49,3 +49,7 @@ body {
     transform: rotate(360deg);
   }
 }
+.btn-group {
+  margin-left: 4px;
+  float: right;
+}

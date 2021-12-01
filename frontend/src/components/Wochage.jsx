@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import servicedata from "../service/SMpotalSerivce";
 import Pagination from "../components/pagination";
-import ReactPaginate from 'react-paginate';
+import ReactPaginate from "react-paginate";
 
 function Wochage({ history }) {
   const [datalist, setDatalist] = useState([]);
@@ -12,12 +12,10 @@ function Wochage({ history }) {
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPosts = datalist.slice(indexOfFirstPost, indexOfLastPost);
 
-  const paginate = pageNum =>setCurrentPage(pageNum);
+  const paginate = (pageNum) => setCurrentPage(pageNum);
 
   useEffect(() => {
     async function fetchData() {
-      
-
       await servicedata.Smlist().then(function (res) {
         setDatalist(res.data);
       });
@@ -31,9 +29,6 @@ function Wochage({ history }) {
     history.push("/detail/" + name);
   }
 
-
- 
-
   return (
     <div class="content">
       <div class="container-fluid">
@@ -41,7 +36,7 @@ function Wochage({ history }) {
           <div class="col-12">
             <div class="card card-primary card-outline card-outline-tabs">
               <div class="card-header p-0 border-bottom-0">
-                <a class="btn  bg-secondary float-right" href="/wonew">
+                <a class="btn btn-success float-right" href="/wonew">
                   <i class="fas fa-edit"></i>신규
                 </a>
                 <ul
@@ -103,10 +98,12 @@ function Wochage({ history }) {
                           ))}
                         </tbody>
                       </table>
-                      
-                   
                     </div>
-                    <Pagination postPerPage={postPerPage} totalPosts={datalist.length} paginate={paginate}></Pagination>
+                    <Pagination
+                      postPerPage={postPerPage}
+                      totalPosts={datalist.length}
+                      paginate={paginate}
+                    ></Pagination>
                   </div>
                 </div>
               </div>

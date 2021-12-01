@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import servicedata from "../service/SMpotalSerivce";
-import {AgGridColumn, AgGridReact} from 'ag-grid-react';
-import 'ag-grid-community/dist/styles/ag-grid.css';
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import Pagination from "../components/pagination";
 
 class index extends Component {
@@ -11,20 +8,17 @@ class index extends Component {
 
     this.state = {
       datalist: [],
-      gridApi:null,
-      gridColumnApi:null,
+      gridApi: null,
+      gridColumnApi: null,
       postPerPage: 5,
-      currentPage: 1
+      currentPage: 1,
     };
   }
 
   componentDidMount() {
-    
     servicedata.Smlist().then((res) => {
       this.setState({ datalist: res.data });
-     
     });
-
   }
   render() {
     // ag-grid 사용법
@@ -42,14 +36,16 @@ class index extends Component {
 
     const indexOfLastPost = this.state.currentPage * this.state.postPerPage;
     const indexOfFirstPost = indexOfLastPost - this.state.postPerPage;
-    const currentdatas = this.state.datalist.slice(indexOfFirstPost, indexOfLastPost);
-    
-    const paginate = pageNum =>this.setState({currentPage:pageNum});
-    
+    const currentdatas = this.state.datalist.slice(
+      indexOfFirstPost,
+      indexOfLastPost
+    );
+
+    const paginate = (pageNum) => this.setState({ currentPage: pageNum });
+
     console.log(this.state.datalist);
-    
+
     return (
-       
       <div>
         <section class="content">
           <div class="row">
@@ -105,8 +101,7 @@ class index extends Component {
 
               <div class="card-body p-0">
                 <div class="table-responsive">
-                
-                  <table class="table m-0"  id="example1">
+                  <table class="table m-0" id="example1">
                     <thead>
                       <tr>
                         <th>번호</th>
@@ -141,11 +136,7 @@ class index extends Component {
                         </tr>
                       ))}
                     </tbody>
-                    
                   </table>
-
-                  
-
 
                   {/*ag-grid 사용법
                     <div className="ag-theme-alpine" style={{height: 600}}>
@@ -161,8 +152,11 @@ class index extends Component {
                     </AgGridReact>
                   </div> */}
                 </div>
-                <Pagination postPerPage={this.state.postPerPage} totalPosts={this.state.datalist.length} paginate={paginate}></Pagination>
-                
+                <Pagination
+                  postPerPage={this.state.postPerPage}
+                  totalPosts={this.state.datalist.length}
+                  paginate={paginate}
+                ></Pagination>
               </div>
               <div class="card-footer clearfix"></div>
             </div>
