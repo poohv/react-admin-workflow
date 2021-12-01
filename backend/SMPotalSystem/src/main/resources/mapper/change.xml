@@ -26,8 +26,8 @@
  		where a.wonum = #{no}
  	</select>
  	
- 	<update id="update">
- 		update smchange set status=#{status}
+ 	<update id="update" parameterType="HashMap">
+ 		update smchange set status=#{status},descript=#{descript},wotype=#{wotype},woclass=#{woclass}
  		where wonum = #{wonum} 
  	</update>
  </mapper>
