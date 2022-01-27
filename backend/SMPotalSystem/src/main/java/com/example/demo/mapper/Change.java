@@ -5,6 +5,8 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.example.demo.model.User;
+
 @Mapper
 public interface Change {
 
@@ -17,4 +19,8 @@ public interface Change {
 	List<Map<String, Object>> detail(Map<String, Object> params);
 	
 	int update(Map<String, Object> params);
+	
+	User userlogin(String params);
+	
+	int join(User user);
 }

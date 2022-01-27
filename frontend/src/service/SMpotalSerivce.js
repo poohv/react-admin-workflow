@@ -21,7 +21,7 @@ class SMpotalSerivce{
     
 
     update(params){
-        debugger;
+        
         return axios.post(SMPotal_API_BASE_URL+"update",params)};
 }
 

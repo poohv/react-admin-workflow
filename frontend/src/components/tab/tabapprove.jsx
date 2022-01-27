@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Smsr from "/react/frontend/src/service/SMpotalSerivce";
+import Smsr from "/react/react-admin-workflow/frontend/src/service/SMpotalSerivce";
 
 function Tabapprove() {
   const [datalist, setDatalist] = useState([]);

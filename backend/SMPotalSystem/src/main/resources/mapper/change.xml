@@ -30,6 +30,14 @@
  		update smchange set status=#{status},descript=#{descript},wotype=#{wotype},woclass=#{woclass}
  		where wonum = #{wonum} 
  	</update>
+ 	
+ 	<select id="userlogin" parameterType="String" resultType="com.example.demo.model.User">
+ 		select * from smuser where userid = #{username}
+ 	</select>
+ 	
+ 	<insert id="join">
+ 		insert into smuser (userid,password,woname,wophone) values (#{username},#{password},#{woname},#{wophone})
+ 	</insert>
  </mapper>
  
  

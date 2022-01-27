@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +15,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.model.User;
 import com.example.demo.service.SmImpl;
 
-@CrossOrigin(origins = "http://localhost:3000")
+
 @Controller
 public class MainController {
 	@Autowired
 	SmImpl sm;
 	
+	@Autowired
+	BCryptPasswordEncoder bper;
+	
+	
+	
+	@RequestMapping("/api/join")
+	@ResponseBody
+	public void login(@RequestBody User params) {
+		System.out.println("회원가입");
+		//회원가입 시 패스워드 암호화 시키기
+		String pw = params.getPassword();
+		String enc = bper.encode(pw);
+		params.setPassword(enc);		
+		sm.join(params);
+		
+	}
 	
 	@RequestMapping("/api/Smlist")
 	@ResponseBody

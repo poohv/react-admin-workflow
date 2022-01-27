@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.Change;
+import com.example.demo.model.User;
 
 
 @Service
@@ -36,5 +37,14 @@ public class SmImpl {
 		
 		public void update(Map<String, Object> params) {
 			wo.update(params);
+		}
+		
+		//로그인
+		public User userlogin(String params){
+			return wo.userlogin(params);
+		}
+		//회원가입
+		public void join(User user) {
+			 wo.join(user);
 		}
 }
