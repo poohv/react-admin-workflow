@@ -22,7 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+		System.out.println("loadUserByUsername 실행");
 		//아이디 확인
 		User userentity = sm.userlogin(username);
 		

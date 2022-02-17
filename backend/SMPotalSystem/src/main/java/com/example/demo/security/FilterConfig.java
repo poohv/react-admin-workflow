@@ -6,18 +6,25 @@ import org.springframework.context.annotation.Configuration;
 
 import com.example.demo.filter.Myfilter;
 
+
+// 자체 필터 기능 만들기
 @Configuration
 public class FilterConfig {
 
 	
-	@Bean
-	public FilterRegistrationBean<Myfilter> filter1(){
-	
-	FilterRegistrationBean<Myfilter> bean = new FilterRegistrationBean<>(new Myfilter());
-	
-	bean.addUrlPatterns("/*");
-	bean.setOrder(0);
-	return bean;
-	}
+	/*
+	 * @Bean 
+	 * 
+	 * public FilterRegistrationBean<Myfilter> filter1(){
+	 * 
+	 * FilterRegistrationBean<Myfilter> bean = new FilterRegistrationBean<>(new Myfilter());
+	 * 
+	 * bean.addUrlPatterns("/*"); 
+	 * bean.setOrder(0); 
+	 * 
+	 * return bean; 
+	 * 
+	 * }
+	 */
 	
 }

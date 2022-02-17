@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.jwt.JwtTokenprovider;
 import com.example.demo.model.User;
 import com.example.demo.service.SmImpl;
 
@@ -27,6 +28,19 @@ public class MainController {
 	@Autowired
 	BCryptPasswordEncoder bper;
 	
+	@Autowired
+	JwtTokenprovider jwttoken;
+	
+	@RequestMapping("/login")
+	@ResponseBody
+	public void loginjoin(User user) {
+		System.out.println(user.getUsername());
+	String Token = jwttoken.createToken(user.getUsername(), user.getRoleList() );
+		System.out.println(Token);
+		
+		//User userdata = sm.userlogin(username);
+		//System.out.println(userdata.getPassword());
+	}
 	
 	
 	@RequestMapping("/api/join")
