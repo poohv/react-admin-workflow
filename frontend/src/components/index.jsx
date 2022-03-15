@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import servicedata from "../service/SMpotalSerivce";
 import Pagination from "../components/pagination";
 
+//main 페이지
 class index extends Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       datalist: [],
       gridApi: null,
@@ -16,8 +17,17 @@ class index extends Component {
   }
 
   componentDidMount() {
+    //db에서 데이터 받고 , 로그인 status 체크
     servicedata.Smlist().then((res) => {
       this.setState({ datalist: res.data });
+    }).catch((error)=>{
+      switch (error.response.status) {
+        case 403:
+            this.props.history.push("/login");       
+        default:
+            break
+     }
+
     });
   }
   render() {

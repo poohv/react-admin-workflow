@@ -18,6 +18,14 @@ function Wochage({ history }) {
     async function fetchData() {
       await servicedata.Smlist().then(function (res) {
         setDatalist(res.data);
+      }).catch((error)=>{
+        switch (error.response.status) {
+          case 403:
+              history.push("/login");       
+          default:
+              break
+       }
+  
       });
     }
     fetchData();

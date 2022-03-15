@@ -12,7 +12,7 @@ function App() {
     
          <Router>
             <Switch>
-            <Route exact path = "/"  component = {Mindex}></Route>
+            <Route exact path = {["/","/main"]}  component = {Mindex}></Route>
             <Route exact path = "/login"  component = {loginpage}></Route>      
             <Route exact path = "/join"  component = {UserJoin}></Route>  
             <Route exact path = "/wochange"  component = {Wochange}></Route>

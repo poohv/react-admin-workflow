@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-const Login = () => {
+const Login = ({ history }) => {
   const [username, setUsername] = useState([]);
 
+  //input 값 받아오기
   const changehandler = (e) => {
     const { value, name } = e.target;
     setUsername({
@@ -11,11 +12,29 @@ const Login = () => {
     });
   };
 
-  useEffect(() => {});
+  //로그인 여부 확인
+  useEffect(() => {
+     
 
+  }, []);
+
+
+  //로그인 api
   function login(e) {
     e.preventDefault();
-    axios.post("http://localhost:8080/api/login");
+    axios.post("http://localhost:8080/api/login",username).then(function(res){
+      if (res.data.Token) {
+        localStorage.setItem("user", JSON.stringify(res.data.Token));
+      }
+      history.push("/main");
+    })
+    
+    .catch(function (error) {
+     // alert("에러가 발생했습니다. 담당자에게 문의해주세요.");
+     // alert(error.data);
+    });
+
+    
   }
   return (
     <div class="hold-transition login-page">
@@ -34,7 +53,7 @@ const Login = () => {
                 <input
                   type="text"
                   class="form-control"
-                  name="username"
+                  name="userid"
                   placeholder="ID"
                   onChange={changehandler}
                 />
@@ -50,6 +69,7 @@ const Login = () => {
                   class="form-control"
                   name="password"
                   placeholder="Password"
+                  onChange={changehandler}
                 />
                 <div class="input-group-append">
                   <div class="input-group-text">
@@ -66,7 +86,7 @@ const Login = () => {
                 </div>
 
                 <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block">
+                  <button type="submit" class="btn btn-primary btn-block" onClick={login}>
                     Sign In
                   </button>
                 </div>
