@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.filter.GenericFilterBean;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.example.demo.model.User;
+
 import lombok.RequiredArgsConstructor;
 
 
@@ -34,13 +36,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
 		System.out.println("JwtAuthenticationFilter 실행");
+	
 		String token = jwtTokenProvider.resolveToken(request);
+		
 		System.out.println("토큰: "+token);
 		
 		 if(token != null && jwtTokenProvider.validateToken(token)){
-			 	System.out.println("토근 검증 완료");
-				System.out.println(jwtTokenProvider.validateToken(token));
-				System.out.println(jwtTokenProvider.getUserPk(token));
+			 	System.out.println("토근 검증 완료");		
 	            Authentication authentication = jwtTokenProvider.getAuthentication(token);
 	            
 	            SecurityContextHolder.getContext().setAuthentication(authentication);

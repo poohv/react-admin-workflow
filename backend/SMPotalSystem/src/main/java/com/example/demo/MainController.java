@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -31,14 +33,21 @@ public class MainController {
 	@Autowired
 	JwtTokenprovider jwttoken;
 	
-	@RequestMapping("/login")
+	@RequestMapping("/api/login")
 	@ResponseBody
-	public void loginjoin(User user) {
-		System.out.println(user.getUsername());
-	String Token = jwttoken.createToken(user.getUsername(), user.getRoleList() );
-		System.out.println(Token);
+	public Map<String, Object> loginjoin(@RequestBody User user , HttpServletResponse response) {
+		User userdata = sm.userlogin(user.getUserid());
+		 Map<String, Object> data = new HashMap<String, Object>();
 		
-		//User userdata = sm.userlogin(username);
+		if (userdata!=null) {
+			String Token = jwttoken.createToken(user.getUserid(), user.getRoleList() );
+			 data.put("user", userdata);
+			 data.put("Token", Token);
+			System.out.println(data);
+			
+		}
+		return data;
+			
 		//System.out.println(userdata.getPassword());
 	}
 	

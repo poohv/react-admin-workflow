@@ -16,6 +16,7 @@ import org.springframework.web.filter.CorsFilter;
 import com.example.demo.filter.Myfilter;
 import com.example.demo.jwt.JwtAuthenticationFilter;
 import com.example.demo.jwt.JwtTokenprovider;
+import com.example.demo.model.User;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
@@ -30,6 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	JwtTokenprovider JwtTokenprovider;
+	
+	
 	
 	@Bean	
 	public BCryptPasswordEncoder encodePwd() {
@@ -46,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		csrf().disable() // csrf 사용 안 함 == REST API 사용하기 때문에 
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // JWT인증사용하므로 세션사용 안함
 		.and()
-		//.addFilter(corsFilter) // @CrossOring(인증x , 시큐리티 필터에 등록 인증(ㅇ))
+		.addFilter(corsFilter) // @CrossOring(인증x , 시큐리티 필터에 등록 인증(ㅇ))
 		
 		.addFilterBefore(new JwtAuthenticationFilter(JwtTokenprovider),UsernamePasswordAuthenticationFilter.class) //시큐리티 필터가 제일 먼저 실행 된다.
 		
@@ -55,7 +58,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.httpBasic().disable()	// id/pw 세션 저장 비활성화
 		.authorizeRequests() 	// 다음 리퀘스트에 대한 사용권한 체크
 		.antMatchers("/api/join","/api/login","/login").permitAll()
-		.anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
+		.anyRequest().authenticated()
+		//.anyRequest().hasRole("USER") // 그외 나머지 요청은 모두 인증된 회원만 접근 가능
 		
 		
 		//.formLogin()
