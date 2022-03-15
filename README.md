@@ -11,7 +11,14 @@
 * frontend :  react
 * backend : spring boot
 
+### ▶개발 환경
+* JAVA
+* Spring Boot
+* Spring Security + JWT
+* Mybatis
+* MariaDB
+* React
 
 ### ▶UI
-* AdminLTE3 으로 커스텀 제작
+* AdminLTE3 template 으로 커스텀 제작
 
